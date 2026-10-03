@@ -156,6 +156,12 @@
     border-radius: 20px; padding: 5px 12px;
   }
 
+  .prop-overlay .tag-store{
+    background: var(--terracota); color:#fff; border-color: var(--terracota);
+    font-weight:600; font-size:12.5px; padding:7px 14px; cursor:pointer;
+  }
+  .prop-overlay .tag-ios{ font-size:11px; color:#c7cdd3; }
+
   /* ---------- STEPS ---------- */
   .steps{ display:grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
   @media (max-width: 780px){ .steps{ grid-template-columns: 1fr; } }
@@ -216,10 +222,14 @@
       <h1>Nde Roga: como tu propia casa,<br>en cualquier rincón del país.</h1>
       <p class="lead">RogaStay conecta viajeros con cabañas, quintas y hospedajes de dueños reales en todo Paraguay. Reservás directo con la persona que te va a recibir, sin intermediarios de por medio.</p>
       <div class="hero-ctas">
-        <a class="btn btn-primary" href="#duenos">Sumá tu alojamiento</a>
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.alannapps.rogastay" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 19h14"/></svg>
+          Descargar en Google Play
+        </a>
+        <a class="btn btn-ghost" href="#duenos">Sumá tu alojamiento</a>
         <span class="soon-pill">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/></svg>
-          Muy pronto en Google Play
+          iOS muy pronto
         </span>
       </div>
     </div>
@@ -255,7 +265,8 @@
         <div class="prop-overlay">
           <div class="mark">📱</div>
           <p>Descargá la app <strong>RogaStay</strong> para reservar <strong>Quinta Los Pinos</strong> directo con el dueño.</p>
-          <span class="tag">Muy pronto en Google Play</span>
+          <span class="tag tag-store" role="link" tabindex="0" data-href="https://play.google.com/store/apps/details?id=com.alannapps.rogastay">Descargar en Google Play</span>
+          <span class="tag-ios">iOS muy pronto</span>
         </div>
       </button>
 
@@ -269,7 +280,8 @@
         <div class="prop-overlay">
           <div class="mark">📱</div>
           <p>Descargá la app <strong>RogaStay</strong> para reservar <strong>Refugio Ybycuí</strong> directo con el dueño.</p>
-          <span class="tag">Muy pronto en Google Play</span>
+          <span class="tag tag-store" role="link" tabindex="0" data-href="https://play.google.com/store/apps/details?id=com.alannapps.rogastay">Descargar en Google Play</span>
+          <span class="tag-ios">iOS muy pronto</span>
         </div>
       </button>
 
@@ -283,7 +295,8 @@
         <div class="prop-overlay">
           <div class="mark">📱</div>
           <p>Descargá la app <strong>RogaStay</strong> para reservar <strong>Cabaña Vista Verde</strong> directo con el dueño.</p>
-          <span class="tag">Muy pronto en Google Play</span>
+          <span class="tag tag-store" role="link" tabindex="0" data-href="https://play.google.com/store/apps/details?id=com.alannapps.rogastay">Descargar en Google Play</span>
+          <span class="tag-ios">iOS muy pronto</span>
         </div>
       </button>
 
@@ -297,7 +310,8 @@
         <div class="prop-overlay">
           <div class="mark">📱</div>
           <p>Descargá la app <strong>RogaStay</strong> para reservar <strong>Quinta Paredes</strong> directo con el dueño.</p>
-          <span class="tag">Muy pronto en Google Play</span>
+          <span class="tag tag-store" role="link" tabindex="0" data-href="https://play.google.com/store/apps/details?id=com.alannapps.rogastay">Descargar en Google Play</span>
+          <span class="tag-ios">iOS muy pronto</span>
         </div>
       </button>
 
@@ -373,6 +387,11 @@
 </footer>
 
 <script>
+  document.querySelectorAll('.tag-store').forEach(el => {
+    const go = e => { e.stopPropagation(); window.open(el.dataset.href, '_blank', 'noopener'); };
+    el.addEventListener('click', go);
+    el.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); go(e); } });
+  });
   document.querySelectorAll('.prop-card').forEach(card => {
     card.addEventListener('click', () => {
       const wasOpen = card.classList.contains('is-open');

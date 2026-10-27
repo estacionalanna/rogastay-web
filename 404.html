@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es-PY">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RogaStay — Alojamiento</title>
+<meta name="description" content="Reservá este alojamiento directo con su dueño en la app RogaStay.">
+<meta name="robots" content="noindex">
+<meta property="og:site_name" content="RogaStay">
+<meta property="og:title" content="Reservá en RogaStay">
+<meta property="og:description" content="Reservá cabañas, quintas y hospedajes directo con sus dueños en todo Paraguay.">
+<meta property="og:image" content="https://rogastay.com.py/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F7F6F3; --bg-soft:#EFEDE7; --navy:#2d3748; --navy-deep:#1c242e;
+    --terracota:#E07B54; --terracota-soft:#FBE7DD; --border:#e5e3de; --muted:#9a9a9a;
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--navy); font-family:'Inter',sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3{ font-family:'Fraunces',serif; font-weight:600; line-height:1.15; margin:0; letter-spacing:-0.01em; }
+  p{ margin:0; }
+  a{ color:inherit; }
+  img{ max-width:100%; display:block; }
+  .wrap{ max-width:880px; margin:0 auto; padding:0 20px; }
+  .top{ display:flex; align-items:center; justify-content:space-between; padding:16px 0; }
+  .top a.brand{ font-family:'Fraunces',serif; font-weight:600; font-size:19px; text-decoration:none; }
+  .top a.home{ font-size:13.5px; color:var(--muted); text-decoration:none; }
+  .btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:14px 26px; border-radius:10px;
+        font-size:16px; font-weight:600; text-decoration:none; background:var(--terracota); color:#fff; border:0; cursor:pointer; }
+  .btn:hover{ background:#c96540; }
+  .btn-block{ width:100%; }
+
+  .hero{ position:relative; border-radius:18px; overflow:hidden; background:var(--bg-soft); aspect-ratio:16/10; }
+  .hero img{ width:100%; height:100%; object-fit:cover; }
+  .thumbs{ display:flex; gap:8px; margin-top:8px; overflow-x:auto; padding-bottom:4px; }
+  .thumbs button{ flex:0 0 76px; height:56px; padding:0; border:2px solid transparent; border-radius:8px; overflow:hidden; cursor:pointer; background:none; }
+  .thumbs button.on{ border-color:var(--terracota); }
+  .thumbs img{ width:100%; height:100%; object-fit:cover; }
+  .badges{ display:flex; flex-wrap:wrap; gap:8px; margin-top:22px; }
+  .badge{ font-size:12px; font-weight:600; padding:4px 11px; border-radius:20px; background:var(--terracota-soft); color:#a8482a; }
+  .badge.ej{ background:var(--navy); color:#fff; }
+  h1{ font-size:clamp(28px,6vw,40px); margin-top:10px; }
+  .loc{ color:var(--muted); margin-top:6px; font-size:15px; }
+  .desc{ margin-top:18px; color:#52606d; font-size:16px; white-space:pre-line; }
+  h2{ font-size:22px; margin:34px 0 14px; }
+  .rates{ background:#fff; border:1px solid var(--border); border-radius:14px; overflow:hidden; }
+  .rate{ display:flex; justify-content:space-between; gap:12px; padding:14px 18px; border-top:1px solid var(--border); font-size:15px; }
+  .rate:first-child{ border-top:0; }
+  .rate b{ color:var(--terracota); white-space:nowrap; }
+  .rate small{ display:block; color:var(--muted); font-size:12.5px; }
+  .cta{ margin-top:34px; background:var(--navy-deep); color:#fff; border-radius:18px; padding:28px 24px; text-align:center; }
+  .cta h2{ color:#fff; margin:0 0 8px; font-size:22px; }
+  .cta p{ color:#c7cdd3; font-size:14.5px; margin-bottom:18px; }
+  .cta .ios{ display:block; margin-top:12px; font-size:12px; color:#c7cdd3; }
+  footer{ text-align:center; color:var(--muted); font-size:12.5px; padding:34px 0 40px; }
+  .msg{ text-align:center; padding:90px 0; }
+  .msg p{ color:#52606d; margin:12px 0 24px; }
+  .skeleton{ background:var(--bg-soft); border-radius:18px; aspect-ratio:16/10; }
+  [hidden]{ display:none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="brand" href="/">RogaStay</a>
+    <a class="home" href="/">Ver todos los alojamientos</a>
+  </div>
+
+  <div id="loading"><div class="skeleton"></div></div>
+
+  <main id="page" hidden>
+    <div class="hero"><img id="foto" alt=""></div>
+    <div class="thumbs" id="thumbs"></div>
+    <div class="badges" id="badges"></div>
+    <h1 id="nombre"></h1>
+    <p class="loc" id="loc"></p>
+    <p class="desc" id="desc"></p>
+
+    <div id="tarifas" hidden>
+      <h2>Tarifas</h2>
+      <div class="rates" id="rates"></div>
+    </div>
+
+    <section class="cta">
+      <h2>Reservá directo con el dueño</h2>
+      <p>Mirá el calendario real, elegí tus fechas y confirmá desde la app RogaStay.</p>
+      <a class="btn btn-block" id="descargar" href="https://play.google.com/store/apps/details?id=com.alannapps.rogastay" target="_blank" rel="noopener">Descargar en Google Play</a>
+      <span class="ios">iOS muy pronto</span>
+    </section>
+  </main>
+
+  <div class="msg" id="notfound" hidden>
+    <h1>No encontramos este alojamiento</h1>
+    <p>Puede que el link esté mal escrito o que la página todavía no esté activa.</p>
+    <a class="btn" href="/">Ir al inicio</a>
+  </div>
+
+  <footer>© 2026 RogaStay — AlannaSoft. Hecho con cariño en Paraguay.</footer>
+</div>
+
+<script>
+(function(){
+  var PROJECT = 'rogastay-213e7';
+  var STORE = 'https://play.google.com/store/apps/details?id=com.alannapps.rogastay';
+
+  // Ejemplos locales: funcionan aunque Firebase todavía no esté configurado.
+  var DEMO = {
+    'cabana-arroyos-y-esteros': { nombre:'Cabaña Arroyos y Esteros', tipo:'Cabaña junto al arroyo', ciudad:'Arroyos y Esteros', departamento:'Cordillera',
+      descripcion:'Una cabaña de madera junto al arroyo, con galería y hamaca para descansar. Ideal para desconectarse del ruido.',
+      fotos:['/img/cabana-arroyos-y-esteros.jpg'], tarifas:[{nombre:'Noche para 2 personas',precio:250000},{nombre:'Noche para 4 personas',precio:380000}] },
+    'quinta-yvy-kui': { nombre:"Quinta Yvy Ku'i", tipo:'Quinta con pileta', ciudad:'Areguá', departamento:'Central',
+      descripcion:'Quinta familiar con pileta, quincho y mucha sombra. Perfecta para pasar el día con amigos o familia.',
+      fotos:['/img/quinta-yvy-kui.jpg'], tarifas:[{nombre:'Pasadía por grupo',precio:600000},{nombre:'Noche completa',precio:900000}] },
+    'quinta-el-amanecer': { nombre:'Quinta El Amanecer', tipo:'Quinta familiar', ciudad:'Piribebuy', departamento:'Cordillera',
+      descripcion:'Quinta con vista a las sierras, galería amplia y amaneceres increíbles.',
+      fotos:['/img/quinta-el-amanecer.jpg'], tarifas:[{nombre:'Noche para 6 personas',precio:700000}] },
+    'hospedaje-al-paso': { nombre:'Hospedaje Al Paso', tipo:'Hospedaje', ciudad:'Caacupé', departamento:'Cordillera',
+      descripcion:'Habitaciones simples y cómodas, con patio y estacionamiento. Para quien está de paso.',
+      fotos:['/img/hospedaje-al-paso.jpg'], tarifas:[{nombre:'Habitación doble',precio:180000},{nombre:'Habitación triple',precio:240000}] }
+  };
+
+  var $ = function(id){ return document.getElementById(id); };
+  var slug = decodeURIComponent(location.pathname.replace(/^\/+|\/+$/g,'').toLowerCase());
+  var DEMO_SLUGS = Object.keys(DEMO);
+
+  function notFound(){ $('loading').hidden = true; $('page').hidden = true; $('notfound').hidden = false; document.title = 'No encontrado — RogaStay'; }
+
+  // Convierte el formato de la API REST de Firestore a objetos simples.
+  function dec(v){
+    if (v == null) return null;
+    if ('stringValue' in v) return v.stringValue;
+    if ('integerValue' in v) return Number(v.integerValue);
+    if ('doubleValue' in v) return v.doubleValue;
+    if ('booleanValue' in v) return v.booleanValue;
+    if ('arrayValue' in v) return (v.arrayValue.values || []).map(dec);
+    if ('mapValue' in v){ var o = {}, f = v.mapValue.fields || {}; for (var k in f) o[k] = dec(f[k]); return o; }
+    return null;
+  }
+
+  function money(n){ return 'Gs. ' + Number(n).toLocaleString('es-PY'); }
+
+  function render(d, esEjemplo){
+    if (!d || d.activa === false) return notFound();
+    document.title = d.nombre + ' — RogaStay';
+    $('nombre').textContent = d.nombre || '';
+    $('loc').textContent = [d.ciudad, d.departamento].filter(Boolean).join(', ');
+    $('desc').textContent = d.descripcion || '';
+
+    var badges = $('badges');
+    function badge(t, cls){ var s = document.createElement('span'); s.className = 'badge' + (cls ? ' ' + cls : ''); s.textContent = t; badges.appendChild(s); }
+    if (d.tipo) badge(d.tipo);
+    if (d.socioFundador) badge('Socio fundador');
+    if (esEjemplo) badge('Ejemplo', 'ej');
+
+    var fotos = (d.fotos || []).filter(function(u){ return /^(https:\/\/|\/img\/)/.test(u); });
+    var main = $('foto');
+    if (fotos.length){
+      main.src = fotos[0]; main.alt = d.nombre || '';
+      if (fotos.length > 1){
+        fotos.forEach(function(u, i){
+          var b = document.createElement('button'); b.type = 'button'; if (!i) b.className = 'on';
+          b.setAttribute('aria-label', 'Foto ' + (i + 1));
+          var im = document.createElement('img'); im.src = u; im.alt = ''; im.loading = 'lazy'; b.appendChild(im);
+          b.onclick = function(){ main.src = u; [].forEach.call($('thumbs').children, function(x){ x.className = ''; }); b.className = 'on'; };
+          $('thumbs').appendChild(b);
+        });
+      }
+    } else { main.parentNode.hidden = true; }
+
+    var t = (d.tarifas || []).filter(function(x){ return x && x.nombre && x.precio != null && x.activa !== false; });
+    if (t.length){
+      t.forEach(function(x){
+        var r = document.createElement('div'); r.className = 'rate';
+        var l = document.createElement('div'); l.textContent = x.nombre;
+        var p = document.createElement('b'); p.textContent = money(x.precio);
+        r.appendChild(l); r.appendChild(p); $('rates').appendChild(r);
+      });
+      $('tarifas').hidden = false;
+    }
+    $('loading').hidden = true; $('page').hidden = false;
+  }
+
+  if (!/^[a-z0-9][a-z0-9-]{1,59}$/.test(slug)) return notFound();
+
+  if (DEMO[slug]) return render(DEMO[slug], true);
+
+  fetch('https://firestore.googleapis.com/v1/projects/' + PROJECT + '/databases/(default)/documents/paginas/' + encodeURIComponent(slug))
+    .then(function(r){ if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function(j){ var d = {}; for (var k in (j.fields || {})) d[k] = dec(j.fields[k]); render(d, false); })
+    .catch(notFound);
+})();
+</script>
+</body>
+</html>

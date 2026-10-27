@@ -132,9 +132,11 @@
     padding: 0; text-align:left; font: inherit; color: inherit;
   }
   .prop-card:hover{ border-color:#d7d3ca; }
-  .prop-photo{
-    height: 140px; display:flex; align-items:center; justify-content:center;
-    font-size: 34px;
+  .prop-photo{ position:relative; height: 150px; background: var(--bg-soft); }
+  .prop-photo img{ width:100%; height:100%; object-fit:cover; }
+  .prop-photo .ejemplo{
+    position:absolute; top:8px; left:8px; font-size:10.5px; font-weight:600; letter-spacing:.02em;
+    background: rgba(28,36,46,.72); color:#fff; padding:3px 8px; border-radius: 20px;
   }
   .prop-info{ padding: 14px 16px 16px; }
   .prop-info .kind{ font-size: 12px; color: var(--muted); }
@@ -251,65 +253,65 @@
   <div class="wrap">
     <div class="section-head">
       <h2>Alojamientos para cada escapada</h2>
-      <p>Desde una quinta con pileta hasta un refugio junto al arroyo. Tocá cada tarjeta para ver cómo vas a poder reservarla.</p>
+      <p>Desde una quinta con pileta hasta un refugio junto al arroyo. Tocá cada tarjeta para ver cómo vas a poder reservarla. Las fotos y los nombres son de ejemplo.</p>
     </div>
     <div class="gallery">
 
-      <button class="prop-card" data-name="Quinta Los Pinos">
-        <div class="prop-photo" style="background:#EAD9C8;">🏊</div>
+      <button class="prop-card" data-name="Cabaña Arroyos y Esteros">
+        <div class="prop-photo"><img src="img/cabana-arroyos-y-esteros.jpg" alt="Cabaña Arroyos y Esteros, cabaña junto al arroyo en Arroyos y Esteros" loading="lazy"><span class="ejemplo">Ejemplo</span></div>
+        <div class="prop-info">
+          <div class="kind">Cabaña junto al arroyo</div>
+          <h3>Cabaña Arroyos y Esteros</h3>
+          <div class="loc">Arroyos y Esteros</div>
+        </div>
+        <div class="prop-overlay">
+          <div class="mark">📱</div>
+          <p>Descargá la app <strong>RogaStay</strong> para reservar <strong>Cabaña Arroyos y Esteros</strong> directo con el dueño.</p>
+          <span class="tag tag-store" role="link" tabindex="0" data-href="https://play.google.com/store/apps/details?id=com.alannapps.rogastay">Descargar en Google Play</span>
+          <span class="tag-ios">iOS muy pronto</span>
+        </div>
+      </button>
+
+      <button class="prop-card" data-name="Quinta Yvy Ku'i">
+        <div class="prop-photo"><img src="img/quinta-yvy-kui.jpg" alt="Quinta Yvy Ku'i, quinta con pileta en Areguá" loading="lazy"><span class="ejemplo">Ejemplo</span></div>
         <div class="prop-info">
           <div class="kind">Quinta con pileta</div>
-          <h3>Quinta Los Pinos</h3>
+          <h3>Quinta Yvy Ku'i</h3>
           <div class="loc">Areguá</div>
         </div>
         <div class="prop-overlay">
           <div class="mark">📱</div>
-          <p>Descargá la app <strong>RogaStay</strong> para reservar <strong>Quinta Los Pinos</strong> directo con el dueño.</p>
+          <p>Descargá la app <strong>RogaStay</strong> para reservar <strong>Quinta Yvy Ku'i</strong> directo con el dueño.</p>
           <span class="tag tag-store" role="link" tabindex="0" data-href="https://play.google.com/store/apps/details?id=com.alannapps.rogastay">Descargar en Google Play</span>
           <span class="tag-ios">iOS muy pronto</span>
         </div>
       </button>
 
-      <button class="prop-card" data-name="Refugio Ybycuí">
-        <div class="prop-photo" style="background:#DCE6D6;">🌲</div>
+      <button class="prop-card" data-name="Quinta El Amanecer">
+        <div class="prop-photo"><img src="img/quinta-el-amanecer.jpg" alt="Quinta El Amanecer, quinta familiar en Piribebuy" loading="lazy"><span class="ejemplo">Ejemplo</span></div>
         <div class="prop-info">
-          <div class="kind">Refugio de montaña</div>
-          <h3>Refugio Ybycuí</h3>
-          <div class="loc">Ybycuí</div>
-        </div>
-        <div class="prop-overlay">
-          <div class="mark">📱</div>
-          <p>Descargá la app <strong>RogaStay</strong> para reservar <strong>Refugio Ybycuí</strong> directo con el dueño.</p>
-          <span class="tag tag-store" role="link" tabindex="0" data-href="https://play.google.com/store/apps/details?id=com.alannapps.rogastay">Descargar en Google Play</span>
-          <span class="tag-ios">iOS muy pronto</span>
-        </div>
-      </button>
-
-      <button class="prop-card" data-name="Cabaña Vista Verde">
-        <div class="prop-photo" style="background:#E4DCEA;">⛰️</div>
-        <div class="prop-info">
-          <div class="kind">Cabaña de sierra</div>
-          <h3>Cabaña Vista Verde</h3>
+          <div class="kind">Quinta familiar</div>
+          <h3>Quinta El Amanecer</h3>
           <div class="loc">Piribebuy</div>
         </div>
         <div class="prop-overlay">
           <div class="mark">📱</div>
-          <p>Descargá la app <strong>RogaStay</strong> para reservar <strong>Cabaña Vista Verde</strong> directo con el dueño.</p>
+          <p>Descargá la app <strong>RogaStay</strong> para reservar <strong>Quinta El Amanecer</strong> directo con el dueño.</p>
           <span class="tag tag-store" role="link" tabindex="0" data-href="https://play.google.com/store/apps/details?id=com.alannapps.rogastay">Descargar en Google Play</span>
           <span class="tag-ios">iOS muy pronto</span>
         </div>
       </button>
 
-      <button class="prop-card" data-name="Quinta Paredes">
-        <div class="prop-photo" style="background:#F3DCC9;">🏡</div>
+      <button class="prop-card" data-name="Hospedaje Al Paso">
+        <div class="prop-photo"><img src="img/hospedaje-al-paso.jpg" alt="Hospedaje Al Paso, hospedaje en Caacupé" loading="lazy"><span class="ejemplo">Ejemplo</span></div>
         <div class="prop-info">
-          <div class="kind">Quinta familiar</div>
-          <h3>Quinta Paredes</h3>
-          <div class="loc">San Bernardino</div>
+          <div class="kind">Hospedaje</div>
+          <h3>Hospedaje Al Paso</h3>
+          <div class="loc">Caacupé</div>
         </div>
         <div class="prop-overlay">
           <div class="mark">📱</div>
-          <p>Descargá la app <strong>RogaStay</strong> para reservar <strong>Quinta Paredes</strong> directo con el dueño.</p>
+          <p>Descargá la app <strong>RogaStay</strong> para reservar <strong>Hospedaje Al Paso</strong> directo con el dueño.</p>
           <span class="tag tag-store" role="link" tabindex="0" data-href="https://play.google.com/store/apps/details?id=com.alannapps.rogastay">Descargar en Google Play</span>
           <span class="tag-ios">iOS muy pronto</span>
         </div>
